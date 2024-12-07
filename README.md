@@ -39,7 +39,7 @@ All of these columns reveal information about the state of the game at the 10 mi
 
 We seperated the dataset into a datasets. One where the dataset is filtered to contain rows for the entire team rather than a single player. This is useful when we predict the outcomes for an entire team. We then created a dataset for only the players to predict the outcomes for a single player.
 
-We then fitlered the rows where the datacompletness column is equal to complete as the rows that aren't complete didn't were missing the values for our columns of interests. \\
+We then fitlered the rows where the datacompletness column is equal to complete as the rows that aren't complete didn't were missing the values for our columns of interests.
 
 
 Team Dataframe
@@ -77,15 +77,18 @@ We did not impute any values as we did not see a need to.
 
 ### EDA
 
+Histogram for the ammount gold at 10 minutes players had. 
 <iframe
-  src="c:/assets/one_var.html"
+  src="/assets/one_var_hist.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
+This plot shows the distribution of how much gold players had at the 10 minute mark.
+
 <iframe
-  src="assets/two_var.html"
+  src="assets/two_var_hist.html"
   width="800"
   height="600"
   frameborder="0"
