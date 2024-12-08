@@ -132,13 +132,13 @@ This table shows the average gold diffferential at 10 minutes for each championn
 
 The variable we are trying to predict is the result column, which only has 2 possible values (1 and 0). 1 means the team won and 0 means the team lost. Therefore, the prediction problem is a binary classification problem. We chose the result as it is most important column as winning is the objective of the game.
 
-We want to predict the result after the 10 minute mark of the game. Given this we will have all match information that has occured within the first 10 minutes. We chose 10 minutes as it was the a good mid-point for predicting the result. We didn't want to use 5 minutes as we felt it was too early in the game for meaningful events to happen in the majority of the games. We did not want to choose a later time as much of the result is already determined. We chose to use a logistic regression model as it works well on binary classification.
+We want to predict the result after the 10 minute mark of the game. Given this we will have all match information that has occured within the first 10 minutes. We chose 10 minutes as it was the a good point for predicting the result. We did not want to choose a later time as much of the result is already determined. We chose to use a logistic regression model as it works well on binary classification.
 
 To test the efficacy of our model, we will use log loss and accuracy. We chose log loss as it works well on classification data because it penalizes confident misclassifications. We reported accuracy as it is an easy to interpret number.
 
 ## Baseline Model
 
-For our baseline model, we used a logistic regression model on goldat10, xpat10, and csat10. All these features are quantitative and did not require any encodings.
+For our baseline model, we used a logistic regression model on goldat10, xpat10, and csat10. All these features are quantitative and did not require any encodings. These features describe how strong a champion is at the 10 minute mark. The more gold, more experience, and the more cs, the stronger the champion will be. (For team same logic applies)
 
 The loss of the model was 0.6896490354686542 for players only.
 The accuracy of the model was 0.5186914054838583 for players only.
@@ -152,16 +152,22 @@ The accuracy for the players only data was 0.5186914054838583 and the team only 
 
 ## Final Model
 
-For our final model, we used a logistic regression model on golddiffat10, xpdiffat10, csdiffat10, killsat10, assistsat10, deathsat10. All these features are quantitative and did not require any encodings.
+For our final model, we used a logistic regression model on golddiffat10, xpdiffat10, csdiffat10, killsat10, assistsat10, deathsat10, opp_killsat10, opp_assistsat10. All these features are quantitative and did not require any encodings. The gold, xp, and cs features are the difference between a player and their opponent (team vs team for team data). This adds context to the previous gold, experience, and cs features we used from before. The more kills and assists is better, while the fewer deaths, opponent kills, and opponent assists. These features help us understand the game state and determine which team is doing better.
 
-We added these features because it gives us more information on how the opponents are doing relative to the players as well as gives information around the kills, assists, and deaths, which are also very important to the game as being dead is time missed from completing actions.
+We added two features being the kills difference and assists difference. We added kills difference as it measures how many kills over their opponent they had, which is a better measure of purely kills. We added assists difference because in the game, multiple players can assist the same kill, which changes how the gold is distributed among the team. If more people assist the kill than the gold is distributed over more people. There are also some addditional more complicated calculations that can increase the amount of gold for an assist, but generally it is better if more players on your team get an assist as it is better to distribute the gold. 
+
+We again used a logistic regression model.
 
 We selected hyperparameters using a GridSearch. We iterated over the C, the regularization parameter, for values of .5, 1, 2. For the tolerance, we iterated over .01, .001, .0001, and .00001.
 
 ### Results
 
-The loss of the model was 0.6457005259987575 for players only.
-The accuracy of the model was 0.626681834229004 for players only.
+The loss of the model was 0.6428710526042916 for players only.
+The accuracy of the model was 0.6313890087474993 for players only.
+
+Best Parameters: C=0.5, tol=0.01
+
+Compared to the player only data from the base model, the loss is lower and the accuracy is higher, which tell us that the this model works better on the player data.
 
 <iframe
   src="assets/confusion_matrix_player.html"
@@ -170,10 +176,13 @@ The accuracy of the model was 0.626681834229004 for players only.
   frameborder="0"
 ></iframe>
 
-The loss of the model was 0.5711560650259742 for teams only.
-The accuracy of the model was 0.7072252294657566 for teams only.
 
-This model was a lot better than the baseline model as for both the player only and team only datasets the loss was lower and the accuracy was higher.
+The loss of the model was 0.5712023541680418 for teams only.
+The accuracy of the model was 0.708166627441751 for teams only.
+
+Best Parameters: C=0.5, tol=0.01
+
+Compared to the team only data from the base model, the loss is lower and the accuracy is higher, which tell us that the this model works better on the team data as well.
 
 <iframe
   src="assets/confusion_matrix_team.html"
@@ -181,3 +190,5 @@ This model was a lot better than the baseline model as for both the player only 
   height="600"
   frameborder="0"
 ></iframe>
+
+Overall, the final model performs much better than the base model.
