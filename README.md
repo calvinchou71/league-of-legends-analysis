@@ -163,8 +163,21 @@ We selected hyperparameters using a GridSearch.
 The loss of the model was 0.6457005259987575 for players only.
 The accuracy of the model was 0.626681834229004 for players only.
 
+<iframe
+  src="assets/confusion_matrix_player.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 The loss of the model was 0.5711560650259742 for teams only.
 The accuracy of the model was 0.7072252294657566 for teams only.
 
 This model was a lot better than the baseline model as for both the player only and team only datasets the loss was lower and the accuracy was higher.
 
+<iframe
+  src="assets/confusion_matrix_team.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
