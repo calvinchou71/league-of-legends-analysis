@@ -37,7 +37,7 @@ All of these columns reveal information about the state of the game at the 10 mi
 
 ### Cleaning
 
-We seperated the dataset into a datasets. One where the dataset is filtered to contain rows for the entire team rather than a single player. This is useful when we predict the outcomes for an entire team. We then created a dataset for only the players to predict the outcomes for a single player.
+We seperated the dataset into two datasets. One where the dataset is filtered to contain rows for the entire team rather than a single player. This is useful when we predict the outcomes for an entire team. We then created a dataset for only the players to predict the outcomes for a single player.
 
 We then fitlered the rows where the datacompletness column is equal to complete as the rows that aren't complete didn't were missing the values for our columns of interests.
 
@@ -130,11 +130,11 @@ This table shows the average gold diffferential at 10 minutes for each championn
 
 ## Framing a Prediction Problem
 
-The variable we are trying to predict is the result column, which only has 2 possible values (1 and 0). 1 means the team won and 0 means the team lost. Therefore, the prediction problem is a binary classification problem. We chose the result as it is most important column as the winning is the objective of the game.
+The variable we are trying to predict is the result column, which only has 2 possible values (1 and 0). 1 means the team won and 0 means the team lost. Therefore, the prediction problem is a binary classification problem. We chose the result as it is most important column as winning is the objective of the game.
 
-We want to predict the result after the 10 minute mark of the game. Given this we will have all match information that has occured within the first 10 minutes. We chose 10 minutes as it was the earliest point for predicting the result. We did not want to choose a later time as much of the result is already determined. We chose to use a logistic regression model as it works well on binary classification.
+We want to predict the result after the 10 minute mark of the game. Given this we will have all match information that has occured within the first 10 minutes. We chose 10 minutes as it was the a good mid-point for predicting the result. We didn't want to use 5 minutes as we felt it was too early in the game for meaningful events to happen in the majority of the games. We did not want to choose a later time as much of the result is already determined. We chose to use a logistic regression model as it works well on binary classification.
 
-To test the efficacy of our model, we will use loss and accuracy. We chose loss as it works well on classification data because it penalizes confident misclassifications. We chose accuracy as the result column is perfectly balanced, so accuracy should work well.
+To test the efficacy of our model, we will use log loss and accuracy. We chose log loss as it works well on classification data because it penalizes confident misclassifications. We reported accuracy as it is an easy to interpret number.
 
 ## Baseline Model
 
@@ -156,8 +156,9 @@ For our final model, we used a logistic regression model on golddiffat10, xpdiff
 
 We added these features because it gives us more information on how the opponents are doing relative to the players as well as gives information around the kills, assists, and deaths, which are also very important to the game as being dead is time missed from completing actions.
 
-We selected hyperparameters using a GridSearch.
+We selected hyperparameters using a GridSearch. We iterated over the C, the regularization parameter, for values of .5, 1, 2. For the tolerance, we iterated over .01, .001, .0001, and .00001.
 
+### Results
 
 The loss of the model was 0.6457005259987575 for players only.
 The accuracy of the model was 0.626681834229004 for players only.
