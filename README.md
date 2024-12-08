@@ -77,15 +77,23 @@ We did not impute any values as we did not see a need to.
 
 ### EDA
 
-Histogram for the ammount gold at 10 minutes players had. 
 <iframe
-  src="/assets/one_var_hist.html"
+  src="assets/kills_bar.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
-This plot shows the distribution of how much gold players had at the 10 minute mark.
+This plot shows the proportion of teams in each league that won a game condtionally on whether they had more kills, the same number of kills, or fewer kills 10 minutes into the game for some of the more popular leagues/competitions. This plot demonstrates the importance of having the greater or an equal amount of kills to the other team as it unlikely to win with fewer kills even at only 10 minutes into the game.
+
+<iframe
+  src="assets/one_var_hist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+We know kills are very important on the outcome of a gaame from the previous plot, so we graphed the distribution of the number of kills at 10 minutes for eahc player. We see that almost all the values are 0 and 1, which tells us that kills are rare to come by, which makes them so important as in the game, it is probably the easiest way to gain an advantage.
 
 <iframe
   src="assets/two_var_hist.html"
@@ -94,12 +102,7 @@ This plot shows the distribution of how much gold players had at the 10 minute m
   frameborder="0"
 ></iframe>
 
-<iframe
-  src="assets/kills_bar.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+We then created a scatter plot of number of kills against the gold differential at 10 minutes with mean highlighted and connected for each number of kills for players. We did this as we established kills are important, but now wanted to see how kills give players an advantage in terms of gold. When you get a kill 300 gold is gained. The general trend of the graph is that mean of points move upward as the number of kills increases. This tells us that the more kills one has the more likely they are to have a larger gold differential. It also tells us that a kill is more important in terms of gold than just the gold gained from the kill, but as well as gold gained from being able to gain more cs by being alive as the difference between the means for many of the nummber of kills is greater than 300. 
 
 <iframe
   src="assets/champ_win_bar.html"
@@ -108,8 +111,10 @@ This plot shows the distribution of how much gold players had at the 10 minute m
   frameborder="0"
 ></iframe>
 
+This plot shows the top 5 most popular champions win percentage. We chose to show this as it interesting to see which champions win more often.
+
 ```py
-print(pivot_table.iloc[:, :10].to_markdown(index=False))
+print(pivot_table.reset_index().head().to_markdown(index=False))
 ```
 
 | position   |    Aatrox |       Ahri |     Akali |   Akshan |   Alistar |   Amumu |   Anivia |   Annie |   Aphelios |       Ashe |   Aurelion Sol |      Azir |       Bard |   Bel'Veth |   Blitzcrank |   Brand |    Braum |   Caitlyn |   Camille |   Cassiopeia |   Cho'Gath |     Corki |   Darius |    Diana |   Dr. Mundo |   Draven |     Ekko |   Elise |   Evelynn |    Ezreal |   Fiddlesticks |    Fiora |     Fizz |     Galio |   Gangplank |    Garen |     Gnar |     Gragas |    Graves |       Gwen |   Hecarim |   Heimerdinger |   Illaoi |   Irelia |     Ivern |      Janna |   Jarvan IV |       Jax |    Jayce |      Jhin |     Jinx |   K'Sante |    Kai'Sa |   Kalista |     Karma |   Karthus |   Kassadin |   Katarina |      Kayle |     Kayn |    Kennen |   Kha'Zix |   Kindred |    Kled |   Kog'Maw |   LeBlanc |   Lee Sin |      Leona |   Lillia |   Lissandra |   Lucian |       Lulu |       Lux |   Malphite |   Malzahar |   Maokai |   Master Yi |   Miss Fortune |   Mordekaiser |   Morgana |       Nami |      Nasus |   Nautilus |    Neeko |   Nidalee |     Nilah |   Nocturne |   Nunu & Willump |     Olaf |   Orianna |      Ornn |   Pantheon |     Poppy |     Pyke |   Qiyana |   Quinn |      Rakan |   Rammus |   Rek'Sai |     Rell |   Renata Glasc |   Renekton |    Rengar |   Riven |   Rumble |     Ryze |     Samira |   Sejuani |    Senna |   Seraphine |      Sett |      Shaco |      Shen |    Shyvana |   Singed |     Sion |     Sivir |   Skarner |       Sona |    Soraka |     Swain |      Sylas |   Syndra |   Tahm Kench |   Taliyah |   Talon |      Taric |    Teemo |    Thresh |   Tristana |   Trundle |   Tryndamere |   Twisted Fate |   Twitch |     Udyr |    Urgot |     Varus |    Vayne |    Veigar |   Vel'Koz |       Vex |        Vi |     Viego |    Viktor |   Vladimir |   Volibear |   Warwick |    Wukong |     Xayah |   Xerath |   Xin Zhao |    Yasuo |      Yone |   Yorick |    Yuumi |       Zac |       Zed |     Zeri |     Ziggs |    Zilean |      Zoe |   Zyra |
@@ -121,7 +126,7 @@ print(pivot_table.iloc[:, :10].to_markdown(index=False))
 | top        |   80.5134 |  594.833   |  -50.1492 | 199.283  |  nan      | nan     | nan      |  nan    |   268.5    |  nan       |            nan | -379      | -1347.5    |    317.5   |     nan      |     nan | nan      |   nan     |  -60.8864 |   -189.5     |   -126     |  205.412  |  302.289 |  nan     |    -99.2857 |   33     | -693.333 | 509     |   nan     |  nan      |        nan     |  102.012 |  nan     |  nan      |      117.65 | -375.056 |  29.5949 |  -209.74   |  45.3809  |  -34.0412  |   nan     |       149.667  |  207.062 |  168.285 | -1952.67  | -1786.71   |   -115.167  |  -4.64655 | 138.237  |  nan      | nan      |      -951 | -584      |   160     | -307.768  |   -98.25  |    nan     |    nan     | -146.707   | -590     |   89.6508 |  nan      | 1669      | 143.057 |  nan      |   805.5   |   93.8148 |  -967      |  146.056 |   489       |  251.545 | -1076.25   | -486      |   -339.165 |    nan     | -263.224 |      nan    |      nan       |       70.9128 |  nan      |  -734      |  -459.211  |   -59      |  568.571 |  -284     | 2148      |   214      |         nan      | 179.51   |  284.5    |  -173.129 |   -56.75   |  -46.0108 | nan      |  724     |  -220.5 | -2398      |  -363    |   nan     | nan      |      nan       |    279.615 |   88.1667 |    85.5 | 293.446  |  44.6154 | -193       | -134.923  |  nan     |    -651.333 |  107.074  | -1914      | -306.821  |  -213.007  | -248.333 | -204.596 |  nan      |  nan      |   nan      | -273.167  |   49.375  |    7.36667 |  nan     |     -215.444 |   nan     |   nan   | -1580.5    |  640.727 | nan       |    961.3   |   82.0952 |     182.191  |        nan     | nan      | -389.462 |  -48.156 | -763      |  157.412 | -12       |    nan    |  263      |   18      |   7.64706 | -141.909  |    16.6964 |   -34.7818 |       924 | -137.748  | nan       | nan      |    59.5    | 163.696  |   56.9346 |  146.231 |  nan     | -157.889  |  nan      | 174.15   |  358      |   78.1765 | nan      |  nan   |
 
 
-Only the first 10 champions are shown to save space.
+This table shows the average gold diffferential at 10 minutes for each championn in each role. The nan's mean the champion was never played in a given role. We chose to show this as it illustrates which champions are stronger early and give their team an advantange at this point in the game.
 
 
 ## Framing a Prediction Problem
