@@ -26,7 +26,7 @@ Our model will predict the result of a league of legends after 10 minutes of the
 
 - deathsat10 is the number of deaths you have at 10 minutes.
 
-- opp_killsat10, opp_assistsat10, and opp_deathat10 are the number of kills, assists, and deaths for your opponent.
+- opp_killsat10, opp_assistsat10, and opp_deathsat10 are the number of kills, assists, and deaths for your opponent.
 
 
 All of these columns reveal information about the state of the game at the 10 minute mark in the game. 
@@ -148,7 +148,9 @@ The accuracy of the model was 0.6552129912920687 for teams only.
 
 This model did not perform that well. The loss for the players only model was 0.6896490354686542 and 0.6214919289200207 for the teams only model. These loss values are quite high.
 
-The accuracy for the players only data was 0.5186914054838583 and the team only data was 0.6552129912920687. On a player by player basis our accuracy was essentially the same as random chance. We do expect the team only data to have a higher accuracy as it takes the aggreate of the entire team against the aggregate of the other team, so it should be more represenative of the game state. 
+The log loss for the player only data was 0.6896490354686542 and the team only data was 0.5186914054838583. The accuracy for the player only data was 0.5186914054838583 and the team only data was 0.6552129912920687.
+
+The log loss isn't that low. On a player by player basis our accuracy was essentially the same as random chance. We do expect the team only data to have a higher accuracy as it takes the aggreate of the entire team against the aggregate of the other team, so it should be more represenative of the game state. This model is not that good based on our results.
 
 ## Final Model
 
